@@ -134,9 +134,9 @@ int addNewClass(struct st_class* c[], int csize){
 // Caution : Don't allow the duplicate class code.
 // You must complete this function.
 
-
 	struct st_class* p = (struct st_class*)malloc(sizeof(struct st_class));
-
+	// 기존 수업 외의 수업ㅇ르 추가하는 함수이다.
+	// 읽어온 수업 코드가 기존 수업과 코드가 겹치는 경우를 걸러주는 과정이 요구된다.
 	// 주의사항 : 중복 시 중복 메시지 및 재입력 받기
 	// 1. 반복문에서 사용할 중복 확인용 Integer 변수 선언
 	// 변수 pass가 0이면 반복 무한
@@ -180,7 +180,7 @@ void editClass(struct st_class* c[], int csize){
 	struct st_class* p;
 	int code;
 	// You must complete this section.
-
+	// 기존에 존재하는 수업의 세부사항을 수정하는 함수이다. 
 	// addNewClass 함수의 입력 받기 반복문에서 수정하기
 	// 중요사항 : 1) 수정할 위치의 index 저장하기 2) pass 1이면 ok, 0이면 목록에 입력된 코드가 없다는 의미이므로 무한 반복
 	// 1 반복문
@@ -224,6 +224,9 @@ void editClass(struct st_class* c[], int csize){
 // You must make all these functions.
 
 int applyMyClasses(int my[], int msize, struct st_class* c[], int csize){
+	// 기존에 존재하는 수업들 중 원하는 과목을 신청하는 프로그램이다.
+	// 신청은 코드 입력을 통해 받으며, '개설 수업 아님'과 '신청된 수업'을 걸러주는 과정이 요구된다.
+	// 추가 신청 여부도 확인해야 한다.
 	// save idx in myclass
 	// editClass와 입력 반복문 동일
 	// 	이미 등록된 수업인 경우 다시 입력 받아야 한다.
@@ -290,6 +293,8 @@ int applyMyClasses(int my[], int msize, struct st_class* c[], int csize){
 }
 
 void printMyClasses(int my[], int msize, struct st_class* c[], int csize){
+	// 위 함수는 신청된 수업 목록을 출력하는 함수이다. 
+	// 수업 목록이 기록된 my[]를 사용하여 목록을 출력한다.
 	// 전체 크레딧 출력해야 하므로 integer all_credit 선언
 	// from 0 to msize 만큼 반복하여 신청한 class 출력
 	// 결과 출력
@@ -302,7 +307,7 @@ void printMyClasses(int my[], int msize, struct st_class* c[], int csize){
 }
 
 void saveMyClass(int my[], int msize, struct st_class* c[], int csize){
-	
+	// 위 함수는 신청된 수업 목록을 별도의 text file에 저장하는 함수이다. 
 	// credit 변수 선언(all, grade, pf)
 	// 파일 my_classes.txt 쓰기 모드로 열기
 	// 양식대로 메시지 출력
