@@ -302,6 +302,7 @@ void printMyClasses(int my[], int msize, struct st_class* c[], int csize){
 }
 
 void saveMyClass(int my[], int msize, struct st_class* c[], int csize){
+	
 	// credit 변수 선언(all, grade, pf)
 	// 파일 my_classes.txt 쓰기 모드로 열기
 	// 양식대로 메시지 출력
