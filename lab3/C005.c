@@ -198,7 +198,7 @@ void pickupRandomChannels(struct st_channel* c[], int size){
 		// idx[random] == 0, first time. so display result
 		// idx[random] == 1, second time. so i--;
 		if(idx[random] == 0){							
-			printf("[%d] %s (%s level, %d peoples)\n", random, c[random]->name, LNAME[c[random]->level], c[random]->count);
+			printf("[%d] %s (%s level, %d peoples)\n", random + 1, c[random]->name, LNAME[c[random]->level], c[random]->count);
 			idx[random] = 1;							// save index number
 		}else if(idx[random] == 1){					
 			i--;
@@ -208,13 +208,45 @@ void pickupRandomChannels(struct st_channel* c[], int size){
 
 }
 void searchChannel(struct st_channel* c[], int size){
+	// 채널을 찾는 함수이다.
+	// 경우는 1) 구독자 범위 따른 출력 2) 포함된 문자에 따른 출력
+	// 1) 최소 최대 범위를 읽은 다음, 범위 내에 포함되는 채널 출력
+	// 2) 입력된 문자열이 포함된 경우만 채널 출력
+	//		strstr()사용
+	
+	int choose  = 0;
+	int min = 0, max = 0;
+	int count = 0;
+	char name[30] = "";
 	printf("> Search Channels\n");
 	printf("> Choose one (1:by peoples 2:by names) > ");
+	scanf("%d", &choose);
+	// case 1
+	if(choose == 1){
+		printf("> Enger the range of peoples (from ~ to) > ");
+		scanf("%d %d", &min, &max);
+		printf("> Result:\n");
+		for(int i = 0; i < size; i ++){
+			if(c[i]->count >= min && c[i]->count <= max){
+				printf("[%2d] %-20s %8d peoples [%s]\n", i + 1, c[i]->name, c[i]->count, LNAME[c[i]->level]);
+				count++;
+			}
+		}
+	}
+	// case 2
+	if(choose == 2){
+		printf("> Enter a names > ");
+		scanf("%s", name);
+		printf("> Result:\n");
+		for(int i = 0; i < size; i ++){
+			if(strstr(c[i]->name, name) != NULL){
+				printf("[%2d] %-20s %8d peoples [%s]\n", i + 1, c[i]->name, c[i]->count, LNAME[c[i]->level]);
+				count++;
+			}
+		}
+	}
 
-
-
-
-
+	printf("> %d channels are found.\n", count);
 }
 
 void updateChannel(struct st_channel* c[], int size){
