@@ -121,41 +121,47 @@ int addChannel(struct st_channel* c[], int size){
 
 void printStatistics(struct st_channel* c[], int size){
 	printf("> Statistics of Channels\n");
-	
+	// 각 레벨마다의 통계 자료를 보여주는 함수이다.
+	// 1. 레벨이 5개이므로 각 레벨에 따라 필요한 변수를 선안한다. (합, 인원, 최대 계산 배열, 인덱스)
+	// 2. 사이즈만큼 반복한다.
+	// 3. 각 레벨에 맞는 조건문을 통하여, 합, 인원, 최대 채널 확인 작업을 거친다.
+	// 4. 최종 결과를 출력한다.
 	float sum[5] = {0};
 	int count[5] = {0};
 	int max[5] = {0};
 	int idx[5] = {0};
+	// loop from 0 to size
 	for(int i = 0; i < size; i ++){
-		if(c[i]->level == 0){
-			count[0]++;
-			sum[0] += c[i]->count;
-			if(max[0] < c[i]->count){
+		// along level
+		if(c[i]->level == 0){			// Graphite
+			count[0]++;					// count channel
+			sum[0] += c[i]->count;		// save c[i]->count for average
+			if(max[0] < c[i]->count){	// check max c[i]->count
 				max[0] = c[i]->count;
 				idx[0] = i;
  			}
-		}else if(c[i]->level == 1){
+		}else if(c[i]->level == 1){		// Opal
 			count[1]++;
 			sum[1] += c[i]->count;
 			if(max[1] < c[i]->count){
 				max[1] = c[i]->count;
 				idx[1] = i;
  			}
-		}else if(c[i]->level == 2){
+		}else if(c[i]->level == 2){		// Bronze
 			count[2]++;
 			sum[2] += c[i]->count;
 			if(max[2] < c[i]->count){
 				max[2] = c[i]->count;
 				idx[2] = i;
  			}
-		}else if(c[i]->level == 3){
+		}else if(c[i]->level == 3){		// Silver
 			count[3]++;
 			sum[3] += c[i]->count;
 			if(max[3] < c[i]->count){
 				max[3] = c[i]->count;
 				idx[3] = i;
  			}
-		}else{
+		}else{							// Gold
 			count[4]++;
 			sum[4] += c[i]->count;
 			if(max[4] < c[i]->count){
@@ -165,6 +171,7 @@ void printStatistics(struct st_channel* c[], int size){
 		}
 	}
 
+	// display result
 	for(int i = 0; i < 5; i ++){
 		printf("%-8s : %d channels, Average %.1f peoples, Top channel : %s (%d peoples)\n", LNAME[i], count[i], (sum[i] / count[i]), c[idx[i]]->name, c[idx[i]]->count);
 	}
@@ -173,10 +180,30 @@ void printStatistics(struct st_channel* c[], int size){
 }
 
 void pickupRandomChannels(struct st_channel* c[], int size){
+	// 랜덤으로 채널 목록을 올리는 함수이다.
+	// 1. 몇 개를 뽑을 것인지 읽어야 한다. 읽은 값만큼 반복하여 출력한다.
+	// 2. 랜덤 변수가 있어야 한다.
+	// 3. 결과 화면 비교했을 때 중복 제거가 필요하므로, 이미 출력된 것에 대하여 인덱스 저장 변수를 만든다.
+	int num = 0;
+	int random = 0;
+	int idx[50] = {0};
 	printf("> Pick up Channels\n");
 	printf("> How much channels you want to pick up? > ");
-
-
+	// read num
+	scanf("%d", &num);									
+	// use loop from 0 to num
+	for(int i = 0; i < num; i++){						
+		random = rand()% + size;		
+		// use if station
+		// idx[random] == 0, first time. so display result
+		// idx[random] == 1, second time. so i--;
+		if(idx[random] == 0){							
+			printf("[%d] %s (%s level, %d peoples)\n", random, c[random]->name, LNAME[c[random]->level], c[random]->count);
+			idx[random] = 1;							// save index number
+		}else if(idx[random] == 1){					
+			i--;
+		}
+	}
 
 
 }
