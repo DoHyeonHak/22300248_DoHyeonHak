@@ -319,6 +319,83 @@ int deleteChannel(struct st_channel* c[], int size){
 
 
 void makeReport(struct st_channel* c[], int size){
+/*
+파라미터 : 채널정보를 저장된 구조체 포인터 배열 c, 채널정보 구조체의 개수 size
+리턴값 : 없음
+하는 일 : report.txt 파일에 [1]과[2] 메뉴의 출력 내용을 저장하고, channels.txt에는 현재까지 변경된
+모든 채널의 이름과 구독자수를 저장한다.
+*/
+/*
+> Enter a menu >> 8
+> All information of channels are saved into channels.txt.
+> Channel Statistics are saved into report.txt.
+*/
+	FILE *file = NULL;
+	// save information
+	file = fopen("channels.txt", "w");
+	for(int i = 0; i < size; i ++){
+		fprintf(file, "%s %d\n", c[i]->name, c[i]->count);
+	}
+	fclose(file);
+	printf("> All information of channels are saved into channels.txt.\n");
 
+	// save Channel Statistics
+	file = fopen("report.txt", "w");
+	for(int i = 0; i < size; i ++){
+		fprintf(file, "[%2d] %-20s %10d peoples [%s] \n", i+1, c[i]->name, c[i]->count,LNAME[c[i]->level]);
+	}
+	
+	// similar Statistic function
+	float sum[5] = {0};
+	int count[5] = {0};
+	int max[5] = {0};
+	int idx[5] = {0};
+	// loop from 0 to size
+	for(int i = 0; i < size; i ++){
+		// along level
+		if(c[i]->level == 0){			// Graphite
+			count[0]++;					// count channel
+			sum[0] += c[i]->count;		// save c[i]->count for average
+			if(max[0] < c[i]->count){	// check max c[i]->count
+				max[0] = c[i]->count;
+				idx[0] = i;
+ 			}
+		}else if(c[i]->level == 1){		// Opal
+			count[1]++;
+			sum[1] += c[i]->count;
+			if(max[1] < c[i]->count){
+				max[1] = c[i]->count;
+				idx[1] = i;
+ 			}
+		}else if(c[i]->level == 2){		// Bronze
+			count[2]++;
+			sum[2] += c[i]->count;
+			if(max[2] < c[i]->count){
+				max[2] = c[i]->count;
+				idx[2] = i;
+ 			}
+		}else if(c[i]->level == 3){		// Silver
+			count[3]++;
+			sum[3] += c[i]->count;
+			if(max[3] < c[i]->count){
+				max[3] = c[i]->count;
+				idx[3] = i;
+ 			}
+		}else{							// Gold
+			count[4]++;
+			sum[4] += c[i]->count;
+			if(max[4] < c[i]->count){
+				max[4] = c[i]->count;
+				idx[4] = i;
+ 			}
+		}
+	}
+	// display result
+	fprintf(file, "\nStatistics of Channels\n");
+	for(int i = 0; i < 5; i ++){
+		fprintf(file, "%-8s : %d channels, Average %.1f peoples, Top channel : %s (%d peoples)\n", LNAME[i], count[i], (sum[i] / count[i]), c[idx[i]]->name, c[idx[i]]->count);
+	}
+	fclose(file);
+	printf("> Channel Statistics are saved into report.txt.\n");
 
 }
