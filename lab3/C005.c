@@ -289,12 +289,14 @@ void updateChannel(struct st_channel* c[], int size){
 }
 
 int deleteChannel(struct st_channel* c[], int size){
-	/*
-	파라미터 : 채널정보를 저장된 구조체 포인터 배열 c, 채널정보 구조체의 개수 size
-	리턴값 : 채널 전체 개수(삭제된 경우 size-1, 삭제 취소된 경우 size)
-	하는 일 : 사용자가 입력한 번호의 구조체 포인터에 연결된 채널정보를 삭제하고, 대신 마지막 번호의 채널을
-	연결한다. 삭제 후에는 채널 개수가 1개 줄어들었으니 size-1을 리턴한다.
-	*/
+	// 위 함수는 할당된 채널 중에서 제거하고 싶은 것들을 제거하는 함수이다.
+	// 제거하고 싶은 채널을 읽고 정보 출력
+	// 제거할 것인지 물어본 이후 yesno에 따라 처리하기
+	// 제거 한다면
+	//	반복문을 통하여 제거된 자리에 그 다음 인덱스 정보를 하나씩 땡겨온다. (구조체는 assignment 가능)
+	//	반복문 탈출 이후 c[size]를 반납한다.
+	//	return size - 1
+	// 제거하지 않는다면 return size
 	int no, yesno;
 	printf("> Delete a new Channel\n");
 	printf("> Enter a number of channel > ");
@@ -305,13 +307,11 @@ int deleteChannel(struct st_channel* c[], int size){
 	scanf("%d", &yesno);
 	if(yesno == 1){
 		// use loop from (no - 1) to size
-		//	c[i] = c[i + 1];
-		// deallocate c[size]
 		for(int i = (no - 1); i < size; i ++){
 			c[i] = c[i + 1];
 		}
-		free(c[size]);
-		return size - 1;
+		free(c[size]);								// deallocate c[size]
+		return size - 1;							
 	}else{
 		return size;
 	}
