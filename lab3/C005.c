@@ -170,12 +170,10 @@ void printStatistics(struct st_channel* c[], int size){
  			}
 		}
 	}
-
 	// display result
 	for(int i = 0; i < 5; i ++){
-		printf("%-8s : %d channels, Average %.1f peoples, Top channel : %s (%d peoples)\n", LNAME[i], count[i], (sum[i] / count[i]), c[idx[i]]->name, c[idx[i]]->count);
+		printf("%-8s : %2d channels, Average %.1f peoples, Top channel : %s (%d peoples)\n", LNAME[i], count[i], (sum[i] / count[i]), c[idx[i]]->name, c[idx[i]]->count);
 	}
-
 
 }
 
@@ -213,7 +211,6 @@ void searchChannel(struct st_channel* c[], int size){
 	// 1) 최소 최대 범위를 읽은 다음, 범위 내에 포함되는 채널 출력
 	// 2) 입력된 문자열이 포함된 경우만 채널 출력
 	//		strstr()사용
-	
 	int choose  = 0;
 	int min = 0, max = 0;
 	int count = 0;
@@ -228,7 +225,7 @@ void searchChannel(struct st_channel* c[], int size){
 		printf("> Result:\n");
 		for(int i = 0; i < size; i ++){
 			if(c[i]->count >= min && c[i]->count <= max){
-				printf("[%2d] %-20s %8d peoples [%s]\n", i + 1, c[i]->name, c[i]->count, LNAME[c[i]->level]);
+				printf("[%2d] %-20s %10d peoples [%s]\n", i + 1, c[i]->name, c[i]->count, LNAME[c[i]->level]);
 				count++;
 			}
 		}
@@ -240,7 +237,7 @@ void searchChannel(struct st_channel* c[], int size){
 		printf("> Result:\n");
 		for(int i = 0; i < size; i ++){
 			if(strstr(c[i]->name, name) != NULL){
-				printf("[%2d] %-20s %8d peoples [%s]\n", i + 1, c[i]->name, c[i]->count, LNAME[c[i]->level]);
+				printf("[%2d] %-20s %10d peoples [%s]\n", i + 1, c[i]->name, c[i]->count, LNAME[c[i]->level]);
 				count++;
 			}
 		}
@@ -255,7 +252,7 @@ void updateChannel(struct st_channel* c[], int size){
 	// 	있으면 진행, 없으면 잘못된 번호 처리하고 break
 	//  있을 때 채널 정보 출력
 	//  수정할 이름, 구독자수 입력받기
-	//	level 범위에 따라 level도 수정할 것
+	//	level 범위에 따라 level도 수정할 것! findLevel 함수 사용
 	int num = 0;
 	char name[30] = "";
 	int people = 0;
@@ -264,24 +261,14 @@ void updateChannel(struct st_channel* c[], int size){
 	scanf("%d", &num);
 	if((num - 1) < size){
 		printf("> Channel Info.\n");
-		printf("[%2d] %-20s %8d peoples [%s]\n", num, c[num - 1]->name, c[num - 1]->count, LNAME[c[num - 1]->level]);
+		printf("[%2d] %-20s %10d peoples [%s]\n", num, c[num - 1]->name, c[num - 1]->count, LNAME[c[num - 1]->level]);
 		printf("> Enter a new name of channel > ");
 		scanf("%s", name);
 		printf("> Enter a new amount of peoples > ");
 		scanf("%d", &people);
 		strcpy(c[num - 1]->name, name);
 		c[num - 1]->count = people;
-		if((people >= 0) && (people < 1000)){
-			c[num - 1]->level = 0;
-		}else if((people >= 1000) && (people < 10000)){
-			c[num - 1]->level = 1;
-		}else if((people >= 10000) && (people < 100000)){
-			c[num - 1]->level = 2;
-		}else if((people >= 100000) && (people < 1000000)){
-			c[num - 1]->level = 3;
-		}else if((people >= 1000000) && (people < 10000000)){
-			c[num - 1]->level = 4;
-		}
+		c[num - 1]->level = findLevel(c[num - 1]->count);
 		printf("> Channel info. is modified.\n ");
 	}else{
 		printf("> Wrong number.\n");
@@ -301,8 +288,15 @@ int deleteChannel(struct st_channel* c[], int size){
 	printf("> Delete a new Channel\n");
 	printf("> Enter a number of channel > ");
 	scanf("%d", &no);
-	printf("> Channel Info.\n");
-	printf("[%2d] %-20s %8d peoples [%s]\n", no, c[no - 1]->name, c[no - 1]->count, LNAME[c[no - 1]->level]);
+	
+	if((no - 1) < size){
+		printf("> Channel Info.\n");
+		printf("[%2d] %-20s %10d peoples [%s]\n", no, c[no - 1]->name, c[no - 1]->count, LNAME[c[no - 1]->level]);
+	}else{
+		printf("> Wrong number.\n");
+		return size;
+	}
+	
 	printf("> Do you want to delete the channel? (1:Yes 0:N0) > ");
 	scanf("%d", &yesno);
 	if(yesno == 1){
@@ -311,25 +305,27 @@ int deleteChannel(struct st_channel* c[], int size){
 			c[i] = c[i + 1];
 		}
 		free(c[size]);								// deallocate c[size]
+		printf("> Channel is deleted.\n");
 		return size - 1;							
 	}else{
+		printf("> Canceled.\n");
 		return size;
 	}
 }
 
 
 void makeReport(struct st_channel* c[], int size){
-/*
-파라미터 : 채널정보를 저장된 구조체 포인터 배열 c, 채널정보 구조체의 개수 size
-리턴값 : 없음
-하는 일 : report.txt 파일에 [1]과[2] 메뉴의 출력 내용을 저장하고, channels.txt에는 현재까지 변경된
-모든 채널의 이름과 구독자수를 저장한다.
-*/
-/*
-> Enter a menu >> 8
-> All information of channels are saved into channels.txt.
-> Channel Statistics are saved into report.txt.
-*/
+	// 위 함수는 결과 저장 함수이다.
+	// 1) 기존 channels.txt에 변경사항 저장하는 과정
+	// 		file open
+	// 		반복문 사용하여 name, count 저장
+	// 		file close
+	// 2) report.txt 생성하며 list와 statistic 저장
+	// 		file open
+	// 		반복문 사용하여 list 저장
+	//		반복문 사용하여 statistic 저장
+	// 		file close
+
 	FILE *file = NULL;
 	// save information
 	file = fopen("channels.txt", "w");
@@ -397,5 +393,4 @@ void makeReport(struct st_channel* c[], int size){
 	}
 	fclose(file);
 	printf("> Channel Statistics are saved into report.txt.\n");
-
 }
