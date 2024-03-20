@@ -250,10 +250,42 @@ void searchChannel(struct st_channel* c[], int size){
 }
 
 void updateChannel(struct st_channel* c[], int size){
+	// 위 함수는 채널 정보를 수정하는 함수이다
+	// 채널 번호 입력 받기
+	// 	있으면 진행, 없으면 잘못된 번호 처리하고 break
+	//  있을 때 채널 정보 출력
+	//  수정할 이름, 구독자수 입력받기
+	//	level 범위에 따라 level도 수정할 것
+	int num = 0;
+	char name[30] = "";
+	int people = 0;
 	printf("> Modify a new Channel\n");
 	printf("> Enter a number of channel > ");
-
-
+	scanf("%d", &num);
+	if((num - 1) < size){
+		printf("> Channel Info.\n");
+		printf("[%2d] %-20s %8d peoples [%s]\n", num, c[num - 1]->name, c[num - 1]->count, LNAME[c[num - 1]->level]);
+		printf("> Enter a new name of channel > ");
+		scanf("%s", name);
+		printf("> Enter a new amount of peoples > ");
+		scanf("%d", &people);
+		strcpy(c[num - 1]->name, name);
+		c[num - 1]->count = people;
+		if((people >= 0) && (people < 1000)){
+			c[num - 1]->level = 0;
+		}else if((people >= 1000) && (people < 10000)){
+			c[num - 1]->level = 1;
+		}else if((people >= 10000) && (people < 100000)){
+			c[num - 1]->level = 2;
+		}else if((people >= 100000) && (people < 1000000)){
+			c[num - 1]->level = 3;
+		}else if((people >= 1000000) && (people < 10000000)){
+			c[num - 1]->level = 4;
+		}
+		printf("> Channel info. is modified.\n ");
+	}else{
+		printf("> Wrong number.\n");
+	}
 }
 
 int deleteChannel(struct st_channel* c[], int size){
