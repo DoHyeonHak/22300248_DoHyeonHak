@@ -264,6 +264,7 @@ void updateChannel(struct st_channel* c[], int size){
 		printf("[%2d] %-20s %10d peoples [%s]\n", num, c[num - 1]->name, c[num - 1]->count, LNAME[c[num - 1]->level]);
 		printf("> Enter a new name of channel > ");
 		scanf("%s", name);
+		getchar();
 		printf("> Enter a new amount of peoples > ");
 		scanf("%d", &people);
 		strcpy(c[num - 1]->name, name);
@@ -281,7 +282,6 @@ int deleteChannel(struct st_channel* c[], int size){
 	// 제거할 것인지 물어본 이후 yesno에 따라 처리하기
 	// 제거 한다면
 	//	반복문을 통하여 제거된 자리에 그 다음 인덱스 정보를 하나씩 땡겨온다. (구조체는 assignment 가능)
-	//	반복문 탈출 이후 c[size]를 반납한다.
 	//	return size - 1
 	// 제거하지 않는다면 return size
 	int no, yesno;
@@ -296,7 +296,7 @@ int deleteChannel(struct st_channel* c[], int size){
 		printf("> Wrong number.\n");
 		return size;
 	}
-	
+
 	printf("> Do you want to delete the channel? (1:Yes 0:N0) > ");
 	scanf("%d", &yesno);
 	if(yesno == 1){
@@ -304,7 +304,6 @@ int deleteChannel(struct st_channel* c[], int size){
 		for(int i = (no - 1); i < size; i ++){
 			c[i] = c[i + 1];
 		}
-		free(c[size]);								// deallocate c[size]
 		printf("> Channel is deleted.\n");
 		return size - 1;							
 	}else{
