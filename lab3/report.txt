@@ -1,0 +1,37 @@
+[ 1] TheNewBoston             802512 peoples [Silver] 
+[ 2] DerekBanas                 9762 peoples [Opal] 
+[ 3] ProgrammingKnowledge       2312 peoples [Opal] 
+[ 4] Edureka                    5007 peoples [Opal] 
+[ 5] TraversyMedia           1780811 peoples [Gold] 
+[ 6] LearnCode.academy           691 peoples [Graphite] 
+[ 7] ProgrammingwithMosh         371 peoples [Graphite] 
+[ 8] DesignCourse               7874 peoples [Opal] 
+[ 9] HiteshChoudhary           87101 peoples [Bronze] 
+[10] DevTips                  862754 peoples [Silver] 
+[11] Codecourse               817303 peoples [Silver] 
+[12] Academind                971934 peoples [Silver] 
+[13] LevelUpTuts              291318 peoples [Silver] 
+[14] Treehouse                  2298 peoples [Opal] 
+[15] LearnWebCode               8657 peoples [Opal] 
+[16] AdamKhoury                77985 peoples [Bronze] 
+[17] DarrelWilson             788111 peoples [Silver] 
+[18] StefanMischook            27874 peoples [Bronze] 
+[19] Joe                      681582 peoples [Silver] 
+[20] ParysAcademy               8027 peoples [Opal] 
+[21] JREAM                     72229 peoples [Bronze] 
+[22] 1stWebDesigner            75434 peoples [Bronze] 
+[23] NeilRowe                   5219 peoples [Opal] 
+[24] JoshuaFluke                9823 peoples [Opal] 
+[25] JesseShowalter             4067 peoples [Opal] 
+[26] ChrisCoyier                2044 peoples [Opal] 
+[27] ChrisSean                 56289 peoples [Bronze] 
+[28] Tuts+WebDesign            90165 peoples [Bronze] 
+[29] Do'sCoding                24680 peoples [Bronze] 
+[30] Do's                        579 peoples [Graphite] 
+
+Statistics of Channels
+Graphite : 3 channels, Average 547.0 peoples, Top channel : LearnCode.academy (691 peoples)
+Opal     : 11 channels, Average 5917.3 peoples, Top channel : JoshuaFluke (9823 peoples)
+Bronze   : 8 channels, Average 63969.6 peoples, Top channel : Tuts+WebDesign (90165 peoples)
+Silver   : 7 channels, Average 745073.4 peoples, Top channel : Academind (971934 peoples)
+Gold     : 1 channels, Average 1780811.0 peoples, Top channel : TraversyMedia (1780811 peoples)

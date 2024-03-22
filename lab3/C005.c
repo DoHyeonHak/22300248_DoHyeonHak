@@ -116,7 +116,7 @@ int addChannel(struct st_channel* c[], int size){
 	c[size] = temp;
 	printf("> New channel is added.\n");
 	printf("[%2d] %-20s %10d peoples [%s] \n",size+1, c[size]->name, c[size]->count,LNAME[c[size]->level]);
-	return size+1;
+	return size + 1;
 }
 
 void printStatistics(struct st_channel* c[], int size){
@@ -259,7 +259,7 @@ void updateChannel(struct st_channel* c[], int size){
 	printf("> Modify a new Channel\n");
 	printf("> Enter a number of channel > ");
 	scanf("%d", &num);
-	if((num - 1) < size){
+	if((num - 1) < size && (num - 1) >= 0){
 		printf("> Channel Info.\n");
 		printf("[%2d] %-20s %10d peoples [%s]\n", num, c[num - 1]->name, c[num - 1]->count, LNAME[c[num - 1]->level]);
 		printf("> Enter a new name of channel > ");
