@@ -220,7 +220,7 @@ void searchChannel(struct st_channel* c[], int size){
 	scanf("%d", &choose);
 	// case 1
 	if(choose == 1){
-		printf("> Enger the range of peoples (from ~ to) > ");
+		printf("> Enter the range of peoples (from ~ to) > ");
 		scanf("%d %d", &min, &max);
 		printf("> Result:\n");
 		for(int i = 0; i < size; i ++){
