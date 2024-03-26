@@ -1,5 +1,6 @@
 TheNewBoston 802512
 DerekBanas 9762
+theComputerGuy 8985
 ProgrammingKnowledge 2312
 Edureka 5007
 TraversyMedia 1780811
@@ -26,5 +27,4 @@ JesseShowalter 4067
 ChrisCoyier 2044
 ChrisSean 56289
 Tuts+WebDesign 90165
-Do'sCoding 24680
-Do's 579
+NaveedZiarab 658635

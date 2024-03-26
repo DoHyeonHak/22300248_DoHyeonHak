@@ -3,6 +3,8 @@
 #include <string.h>
 #include <time.h>
 
+#define FILENAME "contact.txt"
+
 typedef struct{
 	char name[30]; 	
 	char email[50];	
@@ -10,6 +12,8 @@ typedef struct{
     char relationship[10];
     int favorite;
 } Contact;
+
+char sign[2][5] = {"*", " "};
 
 // function
 int loadData(Contact *c);
@@ -27,12 +31,11 @@ int main(void) {
     int menu;
     Contact *contact[80];                   // Info list (0 ~ 80)
 
-	srand(time(0));
 	size = loadData(contact);
-
+	printf("Contact CRUD!\nWhat do you want to do?\n");
 	while(1){
 		printf("\n> Menu 1.List 2.Add 3.Delete 4.Search 5.Edit 6.Favorite 7.Save 0.Quit\n");
-		printf(">> Menu? > ");
+		printf(">>>> ");
 		scanf("%d", &menu);
 
 		if(number == 1){ 
@@ -62,15 +65,36 @@ int main(void) {
 }
 
 int loadData(Contact *c, int size){
-
+	// load Data
+	// file open
+	// 	use loop until feof
+	// 		declare pointer struct variable and allocate
+	//		read contents
+	//	assignment
+	//	count++
+	// file close
+	int count = 0;
+	int ret = 0;
+	FILE* fp = 0;
+	fp = fopen(FILENAME, 'r');
+	while(!feof(fp)){
+		Contact* Info = (Contact*)malloc(sizeof(Contact));
+		ret = fscanf("%s %s %s %s %d", Info->name, Info->phone_num, Info->email, Info->relationship, Info->favorite);
+		if(ret < 5){
+			break;
+		}
+		c[count] = Info;
+		count++;
+	}
+	return count;
 }
 
 void printContact(Contact *c, int size){
-
+	
 }
 
 int addContact(Contact *c, int size){
-
+	
 }
 
 int deleteContact(Contact *c, int size){
