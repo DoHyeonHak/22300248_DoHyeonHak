@@ -99,7 +99,27 @@ void printContact(Contact *c, int size){
 }
 
 int addContact(Contact *c, int size){
-	
+	// read name, phone number, email, relationship, favorite
+	// assignment
+	// display result
+	// return size + 1 (because 'Add'!)
+	Contact *new;
+	new = (Contact*)malloc(sizeof(Contact));
+	printf("Input name : ");
+	scanf("%s", new->name);
+	printf("Input phone number : ");
+	scanf("%s", new->phone_num);
+	printf("Input phone number : ");
+	scanf("%s", new->phone_num);
+	printf("Input relationship : ");
+	scanf("%s", new->phone_num);
+	printf("Would you like to bookmark this contact?(yes = 1, no = 0): ");
+	scanf("%d", new->favorite);
+	c[size]= new;
+	printf("New Contact!\n");
+	printf("[%2d] %s : %s | %s | %s | %s\n", size + 1, c[size]->name, c[size]->phone_num, c[size]->relationship, c[size]->relationship, sign[c[size]->favorite]);
+
+	return size + 1;
 }
 
 int deleteContact(Contact *c, int size){
