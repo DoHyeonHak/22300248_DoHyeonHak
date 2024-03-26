@@ -90,7 +90,12 @@ int loadData(Contact *c, int size){
 }
 
 void printContact(Contact *c, int size){
-	
+	// use loop from 0 to size
+	// display Contact Information!
+	printf("Contact List\n");
+	for(int i = 0; i < size; i ++){
+		printf("[%2d] %s : %s | %s | %s | %s\n", i + 1, c->name, c->phone_num, c->relationship, c->relationship, sign[c->favorite]);
+	}
 }
 
 int addContact(Contact *c, int size){
