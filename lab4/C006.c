@@ -216,14 +216,47 @@ void searchContact(Contact* c[], int size){
 	}else if(no == 1){
 		printf("> %d Contact is founded.\n", no);
 	}else if(no == 1){
-		printf("> Contact does not exist.\n", );
+		printf("> Contact does not exist.\n");
 	}
 }
 
 void saveContact(Contact* c[], int size){
+	// 1 is Contact list
+	// save in contact.txt
+	// and make report
+	// All Contact list and Favorite Contact list
+	
+	// save new Contacts
+	int count = 0;
+	FILE* fp = NULL;
+	fp = fopen(FILENAME, "w");
+	for(int i = 0; i < size; i ++){
+		fprintf(fp, "%s %s %s %s %d\n", c[i]->name, c[i]->phone_num, c[i]->email, c[i]->relationship, c[i]->favorite);
+	}
+	fclose(fp);
 
+	// write new report including Contact list and Favorite Contact List
+	fp = fopen("report.txt", "w");
+	fprintf(fp, "1. Contact List\n");
+	for(int i = 0; i < size; i ++){
+		fprintf(fp, "[%2d] %s : %s | %s | %s | %s\n", i + 1, c[i]->name, c[i]->phone_num, c[i]->email, c[i]->relationship, sign[c[i]->favorite]);
+	}
+	fprintf(fp, "Total : %d\n\n", size);
+	
+	fprintf(fp, "2. Favorite Contact List\n");
+	for(int i = 0; i < size; i ++){
+		if(c[i]->favorite == 1){
+			fprintf(fp, "[%2d] %s : %s | %s | %s | %s\n", count + 1, c[i]->name, c[i]->phone_num, c[i]->email, c[i]->relationship, sign[c[i]->favorite]);
+			count++;
+		}
+	}
+	fprintf(fp, "Total : %d\n\n", count);
+	fclose(fp);
 }
 
 void contactFavorite(Contact* c[], int size){
+	// select and Cancel favorite contact
+	// result only Favorite Contact list
+
 
 }
