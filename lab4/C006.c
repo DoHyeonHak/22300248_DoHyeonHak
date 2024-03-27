@@ -51,13 +51,13 @@ int main(void) {
 			searchContact(contact, amount);
 		}
 		else if(menu == 5){
-			contactFavorite(contact, amount);
+			editContact(contact, amount);
 		}
 		else if(menu == 6){
-            editContact(contact, amount);
+            contactFavorite(contact, amount);
 		}
 		else if(menu == 7){
-			editContact(contact, amount);
+			saveContact(contact, amount);
 		}
 		else break;
 	}
@@ -114,13 +114,7 @@ int addContact(Contact* c[], int size){
 	scanf("%s", new->email);
 	printf("Input relationship : ");
 	scanf("%s", new->relationship);
-	printf("Would you like to bookmark this contact?(yes = 1, no = 0): ");
-	scanf("%d", &yon);
-	if(yon == 1){
-		new->favorite = 1;
-	}else{
-		new->favorite = 0;
-	}
+	new->favorite = 0;				// default
 	c[size]= new;
 	printf("New Contact!\n");
 	printf("[%2d] %s : %s | %s | %s | %s\n", size + 1, c[size]->name, c[size]->phone_num, c[size]->email, c[size]->relationship, sign[c[size]->favorite]);
@@ -141,8 +135,8 @@ int deleteContact(Contact* c[], int size){
 		printf("> Wrong number\n");
 		return size;
 	}
-	
-	printf("> If you want to delete this contact? (yes = 1, no = 0)\n");
+
+	printf("> Would you want to delete this contact? (yes = 1, no = 0)\n");
 	scanf("%d", &yon);
 
 	if(yon == 1){
@@ -158,6 +152,36 @@ int deleteContact(Contact* c[], int size){
 }
 
 void editContact(Contact* c[], int size){
+	int number = 0;
+	int yon = 0;
+	Contact* new ;
+	new = (Contact*)malloc(sizeof(Contact));
+	printf("> Edit Contact\n");
+	printf("> Enter a number of Contact : ");
+	scanf("%d", &number);
+	if(number - 1 < size){
+		printf("> Contact Information\n");
+		printf("[%2d] %s : %s | %s | %s | %s\n", number, c[number - 1]->name, c[number - 1]->phone_num, c[number - 1]->email, c[number - 1]->relationship, sign[c[number - 1]->favorite]);
+		printf("> Edit process\n");
+		printf("Input name : ");
+		scanf("%s", new->name);
+		printf("Input phone number : ");
+		scanf("%s", new->phone_num);
+		printf("Input email : ");
+		scanf("%s", new->email);
+		printf("Input relationship : ");
+		scanf("%s", new->relationship);
+		new->favorite = 0;						// default
+		printf(">>> %s : %s | %s | %s | %s\n", new->name, new->phone_num, new->email, new->relationship, sign[new->favorite]);
+		printf("> Would you want to edit this Contact? (yes = 1, no = 0)\n");
+		scanf("%d", &yon);
+		if(yon == 1){
+			c[number - 1] = new;
+		}
+		printf("Contact id edited.\n");
+	}else{
+		printf("Wrong number\n");
+	}
 
 }
 
