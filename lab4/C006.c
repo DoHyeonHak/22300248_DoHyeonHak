@@ -23,7 +23,7 @@ int deleteContact(Contact* c[], int size);
 void editContact(Contact* c[], int size);
 void searchContact(Contact* c[], int size);
 void saveContact(Contact* c[], int size);
-void contactFavorite(Contact* c[], int size);
+void favoriteContact(Contact* c[], int size);
 
 
 int main(void) {
@@ -54,7 +54,7 @@ int main(void) {
 			editContact(contact, amount);
 		}
 		else if(menu == 6){
-            contactFavorite(contact, amount);
+            favoriteContact(contact, amount);
 		}
 		else if(menu == 7){
 			saveContact(contact, amount);
@@ -227,6 +227,7 @@ void saveContact(Contact* c[], int size){
 	// All Contact list and Favorite Contact list
 	
 	// save new Contacts
+	printf("> Save Contact\n");
 	int count = 0;
 	FILE* fp = NULL;
 	fp = fopen(FILENAME, "w");
@@ -252,11 +253,56 @@ void saveContact(Contact* c[], int size){
 	}
 	fprintf(fp, "Total : %d\n\n", count);
 	fclose(fp);
+	printf("> Saved all of Contact in 'contact.txt'\n");
+	printf("> Made 'report.txt'\n");
+
 }
 
-void contactFavorite(Contact* c[], int size){
+void favoriteContact(Contact* c[], int size){
 	// select and Cancel favorite contact
 	// result only Favorite Contact list
+	int mode = 0;
+	int num = 0;
 
+	printf("> Select and Cancel favorite contact\n");
+	printf("> Favorite Contact List\n");
+	for(int i = 0; i < size; i ++){
+		if(c[i]->favorite == 1){
+			printf("[%2d] %s : %s | %s | %s | %s\n", i + 1, c[i]->name, c[i]->phone_num, c[i]->email, c[i]->relationship, sign[c[i]->favorite]);
+		}
+	}
+
+	printf("\n> Enter mode (1: Select, 2: Cancel): ");
+	scanf("%d", &mode);
+
+	if(mode == 1){
+		while(1){
+			printf("> Enter Contact number: ");
+			scanf("%d", &num);
+			if(c[num - 1]->favorite == 0){
+				c[num - 1]->favorite = 1;
+				printf("> Selected!\n");
+				break;
+			}
+			printf("> This contact is already selected!\n");
+		}
+	}else if(mode == 2){
+		while(1){
+			printf("> Enter Contact number: ");
+			scanf("%d", &num);
+			if(c[num - 1]->favorite == 1){
+				c[num - 1]->favorite = 0;
+				printf("> Canceled\n");
+				break;
+			}
+			printf("> This contact is not favorite contact!\n");
+		}	
+	}
+
+	for(int i = 0; i < size; i ++){
+		if(c[i]->favorite == 1){
+			printf("[%2d] %s : %s | %s | %s | %s\n", i + 1, c[i]->name, c[i]->phone_num, c[i]->email, c[i]->relationship, sign[c[i]->favorite]);
+		}
+	}
 
 }
