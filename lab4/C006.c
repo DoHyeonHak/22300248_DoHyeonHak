@@ -13,7 +13,7 @@ typedef struct{
     int favorite;
 } Contact;
 
-char sign[2][5] = {"-", "*"};
+char sign[2][5] = {"-", "*"};				// "-" : not favorite,	 "*" : favorite
 
 // function
 int loadData(Contact* c[]);
@@ -23,7 +23,7 @@ int deleteContact(Contact* c[], int size);
 void editContact(Contact* c[], int size);
 void searchContact(Contact* c[], int size);
 void saveContact(Contact* c[], int size);
-void favoriteContact(Contact* c[], int size);
+void subscribeFavorite(Contact* c[], int size);
 
 
 int main(void) {
@@ -54,7 +54,7 @@ int main(void) {
 			editContact(contact, amount);
 		}
 		else if(menu == 6){
-            favoriteContact(contact, amount);
+            subscribeFavorite(contact, amount);
 		}
 		else if(menu == 7){
 			saveContact(contact, amount);
@@ -92,9 +92,9 @@ int loadData(Contact *c[]){
 void printContact(Contact* c[], int size){
 	// use loop from 0 to size
 	// display Contact Information!
-	printf("Contact List\n");
+	printf("> Contact List\n");
 	for(int i = 0; i < size; i ++){
-		printf("[%2d] %s : %s | %s | %s | %s\n", i + 1, c[i]->name, c[i]->phone_num, c[i]->email, c[i]->relationship, sign[c[i]->favorite]);
+		printf("[%2d] %-8s : %s | %-23s | %-10s | %s\n", i + 1, c[i]->name, c[i]->phone_num, c[i]->email, c[i]->relationship, sign[c[i]->favorite]);
 	}
 }
 
@@ -106,23 +106,28 @@ int addContact(Contact* c[], int size){
 	Contact *new;
 	int yon = 0;
 	new = (Contact*)malloc(sizeof(Contact));
-	printf("Input name : ");
+	printf("> Input name : ");
 	scanf("%s", new->name);
-	printf("Input phone number : ");
+	printf("> Input phone number : ");
 	scanf("%s", new->phone_num);
-	printf("Input email : ");
+	printf("> Input email : ");
 	scanf("%s", new->email);
-	printf("Input relationship : ");
+	printf("> Input relationship : ");
 	scanf("%s", new->relationship);
 	new->favorite = 0;				// default
 	c[size]= new;
-	printf("New Contact!\n");
-	printf("[%2d] %s : %s | %s | %s | %s\n", size + 1, c[size]->name, c[size]->phone_num, c[size]->email, c[size]->relationship, sign[c[size]->favorite]);
+	printf("> New Contact!\n");
+	printf("[%2d] %-8s : %s | %-23s | %-10s | %s\n", size + 1, c[size]->name, c[size]->phone_num, c[size]->email, c[size]->relationship, sign[c[size]->favorite]);
 
 	return size + 1;
 }
 
 int deleteContact(Contact* c[], int size){
+	// delete Contact
+	// read number
+	// if number in size, display Info, else return size
+	// display the message for checking Deleting
+	// if yon is 1, delete, else cancel
 	int number = 0;
 	int yon = 0;
 	printf("> Delete Contact\n");
@@ -130,28 +135,34 @@ int deleteContact(Contact* c[], int size){
 	scanf("%d", &number);
 	if(number - 1 < size){
 		printf("> Contact Information\n");
-		printf("[%2d] %s : %s | %s | %s | %s\n", number, c[number - 1]->name, c[number - 1]->phone_num, c[number - 1]->email, c[number - 1]->relationship, sign[c[number - 1]->favorite]);
+		printf("[%2d] %-8s : %s | %-23s | %-10s | %s\n", number, c[number - 1]->name, c[number - 1]->phone_num, c[number - 1]->email, c[number - 1]->relationship, sign[c[number - 1]->favorite]);
 	}else{
 		printf("> Wrong number\n");
 		return size;
 	}
 
-	printf("> Would you want to delete this contact? (yes = 1, no = 0)\n");
+	printf("> Do you want to delete this contact? (yes = 1, no = 0)\n: ");
 	scanf("%d", &yon);
 
 	if(yon == 1){
 		for(int i = number - 1; i < size; i ++){
 			c[i] = c[i + 1];
 		}
-		printf("Contact is deleted.\n");
+		printf("> Contact is deleted.\n");
 		return size - 1;
 	}else{
-		printf("Canceled\n");
+		printf("> Canceled\n");
 	}
 	return size;
 }
 
 void editContact(Contact* c[], int size){
+	// edit contact
+	// allocate *new for assignment
+	// read number
+	// if number in size, display Info and read information
+	// display edited infomation and display the message for editing information
+	// if yon is 1, edit
 	int number = 0;
 	int yon = 0;
 	Contact* new ;
@@ -161,30 +172,35 @@ void editContact(Contact* c[], int size){
 	scanf("%d", &number);
 	if(number - 1 < size){
 		printf("> Contact Information\n");
-		printf("[%2d] %s : %s | %s | %s | %s\n", number, c[number - 1]->name, c[number - 1]->phone_num, c[number - 1]->email, c[number - 1]->relationship, sign[c[number - 1]->favorite]);
+		printf("[%2d] %-8s : %s | %-23s | %-10s | %s\n", number, c[number - 1]->name, c[number - 1]->phone_num, c[number - 1]->email, c[number - 1]->relationship, sign[c[number - 1]->favorite]);
 		printf("> Edit process\n");
-		printf("Input name : ");
+		printf("Enter name : ");
 		scanf("%s", new->name);
-		printf("Input phone number : ");
+		printf("Enter phone number : ");
 		scanf("%s", new->phone_num);
-		printf("Input email : ");
+		printf("Enter email : ");
 		scanf("%s", new->email);
-		printf("Input relationship : ");
+		printf("Enter relationship : ");
 		scanf("%s", new->relationship);
 		new->favorite = 0;						// default
-		printf(">>> %s : %s | %s | %s | %s\n", new->name, new->phone_num, new->email, new->relationship, sign[new->favorite]);
-		printf("> Would you want to edit this Contact? (yes = 1, no = 0)\n");
+		printf("> %-8s : %s | %-23s | %-10s | %s\n", new->name, new->phone_num, new->email, new->relationship, sign[new->favorite]);
+		printf("> Do you want to edit this contact? (yes = 1, no = 0)\n: ");
 		scanf("%d", &yon);
 		if(yon == 1){
 			c[number - 1] = new;
+			printf("> Contact is edited.\n");
 		}
-		printf("Contact id edited.\n");
 	}else{
-		printf("Wrong number\n");
+		printf("> Wrong number\n");
 	}
 }
 
 void searchContact(Contact* c[], int size){
+	// search contact
+	// make mode [input name, phone number]
+	// point!
+	//	1) use strstr
+	// 	2) sort out cases [no > 1 | no == 1 | no == 0]
 	int mode = 0;
 	int no = 0;
 	char name[100] = "";
@@ -197,7 +213,7 @@ void searchContact(Contact* c[], int size){
 		scanf("%s", name);
 		for(int i = 0; i < size; i ++){
 			if(strstr(c[i]->name, name) != NULL){
-				printf("[%2d] %s : %s | %s | %s | %s\n", no + 1, c[i]->name, c[i]->phone_num, c[i]->email, c[i]->relationship, sign[c[i]->favorite]);
+				printf("[%2d] %-8s : %s | %-23s | %-10s | %s\n", no + 1, c[i]->name, c[i]->phone_num, c[i]->email, c[i]->relationship, sign[c[i]->favorite]);
 				no++;
 			}
 		}
@@ -206,7 +222,7 @@ void searchContact(Contact* c[], int size){
 		scanf("%s", p_num);
 		for(int i = 0; i < size; i ++){
 			if(strstr(c[i]->phone_num, p_num) != NULL){
-				printf("[%2d] %s : %s | %s | %s | %s\n", no + 1, c[i]->name, c[i]->phone_num, c[i]->email, c[i]->relationship, sign[c[i]->favorite]);
+				printf("[%2d] %-8s : %s | %-23s | %-10s | %s\n", no + 1, c[i]->name, c[i]->phone_num, c[i]->email, c[i]->relationship, sign[c[i]->favorite]);
 				no++;
 			}
 		}
@@ -215,7 +231,7 @@ void searchContact(Contact* c[], int size){
 		printf("> %d Contacts are founded.\n", no);
 	}else if(no == 1){
 		printf("> %d Contact is founded.\n", no);
-	}else if(no == 1){
+	}else if(no == 0){
 		printf("> Contact does not exist.\n");
 	}
 }
@@ -240,14 +256,14 @@ void saveContact(Contact* c[], int size){
 	fp = fopen("report.txt", "w");
 	fprintf(fp, "1. Contact List\n");
 	for(int i = 0; i < size; i ++){
-		fprintf(fp, "[%2d] %s : %s | %s | %s | %s\n", i + 1, c[i]->name, c[i]->phone_num, c[i]->email, c[i]->relationship, sign[c[i]->favorite]);
+		fprintf(fp, "[%2d] %-8s : %s | %-23s | %-10s | %s\n", i + 1, c[i]->name, c[i]->phone_num, c[i]->email, c[i]->relationship, sign[c[i]->favorite]);
 	}
 	fprintf(fp, "Total : %d\n\n", size);
 	
 	fprintf(fp, "2. Favorite Contact List\n");
 	for(int i = 0; i < size; i ++){
 		if(c[i]->favorite == 1){
-			fprintf(fp, "[%2d] %s : %s | %s | %s | %s\n", count + 1, c[i]->name, c[i]->phone_num, c[i]->email, c[i]->relationship, sign[c[i]->favorite]);
+			fprintf(fp, "[%2d] %-8s : %s | %-23s | %-10s | %s\n", count + 1, c[i]->name, c[i]->phone_num, c[i]->email, c[i]->relationship, sign[c[i]->favorite]);
 			count++;
 		}
 	}
@@ -255,53 +271,44 @@ void saveContact(Contact* c[], int size){
 	fclose(fp);
 	printf("> Saved all of Contact in 'contact.txt'\n");
 	printf("> Made 'report.txt'\n");
-
 }
 
-void favoriteContact(Contact* c[], int size){
-	// select and Cancel favorite contact
-	// result only Favorite Contact list
-	int mode = 0;
+void subscribeFavorite(Contact* c[], int size){
+	// subscribe or unsubscribe favorite contact
+	// make favorite contact list for users to refer
 	int num = 0;
+	int yon = 0;
 
-	printf("> Select and Cancel favorite contact\n");
-	printf("> Favorite Contact List\n");
+	printf("> Subscribe Favorite Contact\n");
+	printf("> Favorite Contact List\n");				// for checking Favorite Contact List
 	for(int i = 0; i < size; i ++){
 		if(c[i]->favorite == 1){
-			printf("[%2d] %s : %s | %s | %s | %s\n", i + 1, c[i]->name, c[i]->phone_num, c[i]->email, c[i]->relationship, sign[c[i]->favorite]);
+			printf("[%2d] %-8s : %s | %-23s | %-10s | %s\n", i + 1, c[i]->name, c[i]->phone_num, c[i]->email, c[i]->relationship, sign[c[i]->favorite]);
 		}
 	}
 
-	printf("\n> Enter mode (1: Select, 2: Cancel): ");
-	scanf("%d", &mode);
-
-	if(mode == 1){
-		while(1){
-			printf("> Enter Contact number: ");
-			scanf("%d", &num);
-			if(c[num - 1]->favorite == 0){
-				c[num - 1]->favorite = 1;
-				printf("> Selected!\n");
-				break;
-			}
-			printf("> This contact is already selected!\n");
+	// read num
+	// if contact is not favorite
+	//		if yon is 1, subscribe. else pass
+	// if contact is favorite
+	//		if yon is 1, unsubscribe. else pass 
+	printf("\n> Enter Contact number: ");
+	scanf("%d", &num);
+	if(c[num - 1]->favorite == 0){
+		printf("> This contact is not favorite.\n");
+		printf("> Do you want to subscribe this contact as a favorite? (yes = 1, no = 0): ");
+		scanf("%d", &yon);
+		if(yon == 1){
+			c[num - 1]->favorite = 1;
+			printf("> Subscribed!\n");
 		}
-	}else if(mode == 2){
-		while(1){
-			printf("> Enter Contact number: ");
-			scanf("%d", &num);
-			if(c[num - 1]->favorite == 1){
-				c[num - 1]->favorite = 0;
-				printf("> Canceled\n");
-				break;
-			}
-			printf("> This contact is not favorite contact!\n");
-		}	
-	}
-
-	for(int i = 0; i < size; i ++){
-		if(c[i]->favorite == 1){
-			printf("[%2d] %s : %s | %s | %s | %s\n", i + 1, c[i]->name, c[i]->phone_num, c[i]->email, c[i]->relationship, sign[c[i]->favorite]);
+	}else if(c[num - 1]->favorite == 1){
+		printf("> This contact is already favorite.\n");
+		printf("> Do you want to unsubscribe from this contact? (yes = 1, no = 0): ");
+		scanf("%d", &yon);
+		if(yon == 1){
+			c[num - 1]->favorite = 0;
+			printf("> Unsubscribed!\n");
 		}
 	}
 
