@@ -3,27 +3,25 @@
 #include <string.h>
 #include <time.h>
 
-#define FILENAME "contact.txt"
-
-typedef struct{
-	char name[30]; 	
-	char email[50];	
-	char phone_num[14];	
-    char relationship[10];
-    int favorite;
-} Contact;
-
-char sign[2][5] = {"-", "*"};				// "-" : not favorite,	 "*" : favorite
+#include "Contact.h"
+#include "loadD.h"
+#include "printC.h"
+#include "addC.h"
+#include "deleteC.h"
+#include "editC.h"
+#include "searchC.h"
+#include "saveC.h"
+#include "subscribeF.h"
 
 // function
-int loadData(Contact* c[]);
-void printContact(Contact* c[], int size);
-int addContact(Contact* c[], int size);
-int deleteContact(Contact* c[], int size);
-void editContact(Contact* c[], int size);
-void searchContact(Contact* c[], int size);
-void saveContact(Contact* c[], int size);
-void subscribeFavorite(Contact* c[], int size);
+//int loadData(Contact* c[]);
+//void printContact(Contact* c[], int size);
+//int addContact(Contact* c[], int size);
+//int deleteContact(Contact* c[], int size);
+//void editContact(Contact* c[], int size);
+//void searchContact(Contact* c[], int size);
+//void saveContact(Contact* c[], int size);
+//void subscribeFavorite(Contact* c[], int size);
 
 
 int main(void) {
@@ -63,7 +61,7 @@ int main(void) {
 	}
 	return 0;
 }
-
+/*
 int loadData(Contact *c[]){
 	// load Data
 	// file open
@@ -94,7 +92,7 @@ void printContact(Contact* c[], int size){
 	// display Contact Information!
 	printf("> Contact List\n");
 	for(int i = 0; i < size; i ++){
-		printf("[%2d] %-8s : %s | %-23s | %-10s | %s\n", i + 1, c[i]->name, c[i]->phone_num, c[i]->email, c[i]->relationship, sign[c[i]->favorite]);
+		printf("[%2d] %-8s : %s | %-23s | %-10s\n", i + 1, c[i]->name, c[i]->phone_num, c[i]->email, c[i]->relationship);
 	}
 }
 
@@ -117,10 +115,11 @@ int addContact(Contact* c[], int size){
 	new->favorite = 0;				// default
 	c[size]= new;
 	printf("> New Contact!\n");
-	printf("[%2d] %-8s : %s | %-23s | %-10s | %s\n", size + 1, c[size]->name, c[size]->phone_num, c[size]->email, c[size]->relationship, sign[c[size]->favorite]);
+	printf("[%2d] %-8s : %s | %-23s | %-10s\n", size + 1, c[size]->name, c[size]->phone_num, c[size]->email, c[size]->relationship);
 
 	return size + 1;
 }
+
 
 int deleteContact(Contact* c[], int size){
 	// delete Contact
@@ -135,7 +134,7 @@ int deleteContact(Contact* c[], int size){
 	scanf("%d", &number);
 	if(number - 1 < size){
 		printf("> Contact Information\n");
-		printf("[%2d] %-8s : %s | %-23s | %-10s | %s\n", number, c[number - 1]->name, c[number - 1]->phone_num, c[number - 1]->email, c[number - 1]->relationship, sign[c[number - 1]->favorite]);
+		printf("[%2d] %-8s : %s | %-23s | %-10s\n", number, c[number - 1]->name, c[number - 1]->phone_num, c[number - 1]->email, c[number - 1]->relationship);
 	}else{
 		printf("> Wrong number\n");
 		return size;
@@ -172,7 +171,7 @@ void editContact(Contact* c[], int size){
 	scanf("%d", &number);
 	if(number - 1 < size){
 		printf("> Contact Information\n");
-		printf("[%2d] %-8s : %s | %-23s | %-10s | %s\n", number, c[number - 1]->name, c[number - 1]->phone_num, c[number - 1]->email, c[number - 1]->relationship, sign[c[number - 1]->favorite]);
+		printf("[%2d] %-8s : %s | %-23s | %-10s\n", number, c[number - 1]->name, c[number - 1]->phone_num, c[number - 1]->email, c[number - 1]->relationship);
 		printf("> Edit process\n");
 		printf("Enter name : ");
 		scanf("%s", new->name);
@@ -183,7 +182,7 @@ void editContact(Contact* c[], int size){
 		printf("Enter relationship : ");
 		scanf("%s", new->relationship);
 		new->favorite = 0;						// default
-		printf("> %-8s : %s | %-23s | %-10s | %s\n", new->name, new->phone_num, new->email, new->relationship, sign[new->favorite]);
+		printf("> %-8s : %s | %-23s | %-10s\n", new->name, new->phone_num, new->email, new->relationship);
 		printf("> Do you want to edit this contact? (yes = 1, no = 0)\n: ");
 		scanf("%d", &yon);
 		if(yon == 1){
@@ -213,7 +212,7 @@ void searchContact(Contact* c[], int size){
 		scanf("%s", name);
 		for(int i = 0; i < size; i ++){
 			if(strstr(c[i]->name, name) != NULL){
-				printf("[%2d] %-8s : %s | %-23s | %-10s | %s\n", no + 1, c[i]->name, c[i]->phone_num, c[i]->email, c[i]->relationship, sign[c[i]->favorite]);
+				printf("[%2d] %-8s : %s | %-23s | %-10s\n", no + 1, c[i]->name, c[i]->phone_num, c[i]->email, c[i]->relationship);
 				no++;
 			}
 		}
@@ -222,7 +221,7 @@ void searchContact(Contact* c[], int size){
 		scanf("%s", p_num);
 		for(int i = 0; i < size; i ++){
 			if(strstr(c[i]->phone_num, p_num) != NULL){
-				printf("[%2d] %-8s : %s | %-23s | %-10s | %s\n", no + 1, c[i]->name, c[i]->phone_num, c[i]->email, c[i]->relationship, sign[c[i]->favorite]);
+				printf("[%2d] %-8s : %s | %-23s | %-10s\n", no + 1, c[i]->name, c[i]->phone_num, c[i]->email, c[i]->relationship);
 				no++;
 			}
 		}
@@ -256,14 +255,14 @@ void saveContact(Contact* c[], int size){
 	fp = fopen("report.txt", "w");
 	fprintf(fp, "1. Contact List\n");
 	for(int i = 0; i < size; i ++){
-		fprintf(fp, "[%2d] %-8s : %s | %-23s | %-10s | %s\n", i + 1, c[i]->name, c[i]->phone_num, c[i]->email, c[i]->relationship, sign[c[i]->favorite]);
+		fprintf(fp, "[%2d] %-8s : %s | %-23s | %-10s\n", i + 1, c[i]->name, c[i]->phone_num, c[i]->email, c[i]->relationship);
 	}
 	fprintf(fp, "Total : %d\n\n", size);
 	
 	fprintf(fp, "2. Favorite Contact List\n");
 	for(int i = 0; i < size; i ++){
 		if(c[i]->favorite == 1){
-			fprintf(fp, "[%2d] %-8s : %s | %-23s | %-10s | %s\n", count + 1, c[i]->name, c[i]->phone_num, c[i]->email, c[i]->relationship, sign[c[i]->favorite]);
+			fprintf(fp, "[%2d] %-8s : %s | %-23s | %-10s\n", count + 1, c[i]->name, c[i]->phone_num, c[i]->email, c[i]->relationship);
 			count++;
 		}
 	}
@@ -272,6 +271,7 @@ void saveContact(Contact* c[], int size){
 	printf("> Saved all of Contact in 'contact.txt'\n");
 	printf("> Made 'report.txt'\n");
 }
+
 
 void subscribeFavorite(Contact* c[], int size){
 	// subscribe or unsubscribe favorite contact
@@ -283,7 +283,7 @@ void subscribeFavorite(Contact* c[], int size){
 	printf("> Favorite Contact List\n");				// for checking Favorite Contact List
 	for(int i = 0; i < size; i ++){
 		if(c[i]->favorite == 1){
-			printf("[%2d] %-8s : %s | %-23s | %-10s | %s\n", i + 1, c[i]->name, c[i]->phone_num, c[i]->email, c[i]->relationship, sign[c[i]->favorite]);
+			printf("[%2d] %-8s : %s | %-23s | %-10s\n", i + 1, c[i]->name, c[i]->phone_num, c[i]->email, c[i]->relationship);
 		}
 	}
 
@@ -313,3 +313,5 @@ void subscribeFavorite(Contact* c[], int size){
 	}
 
 }
+
+*/
