@@ -13,7 +13,7 @@ typedef struct{
     int favorite;
 } Contact;
 
-char sign[2][5] = {" ", "*"};
+char sign[2][5] = {"-", "*"};
 
 // function
 int loadData(Contact* c[]);
@@ -182,11 +182,42 @@ void editContact(Contact* c[], int size){
 	}else{
 		printf("Wrong number\n");
 	}
-
 }
 
 void searchContact(Contact* c[], int size){
-
+	int mode = 0;
+	int no = 0;
+	char name[100] = "";
+	char p_num[14] = "";
+	printf("> Search Contact\n");
+	printf("> Select searching mode (1: name, 2: phone number): ");
+	scanf("%d", &mode);
+	if(mode == 1){
+		printf("> Enter name (You can enter some or all of the names.)\n: ");
+		scanf("%s", name);
+		for(int i = 0; i < size; i ++){
+			if(strstr(c[i]->name, name) != NULL){
+				printf("[%2d] %s : %s | %s | %s | %s\n", no + 1, c[i]->name, c[i]->phone_num, c[i]->email, c[i]->relationship, sign[c[i]->favorite]);
+				no++;
+			}
+		}
+	}else if(mode == 2){
+		printf("> Enter phone number (You can enter some or all of the phone number.)\n: ");
+		scanf("%s", p_num);
+		for(int i = 0; i < size; i ++){
+			if(strstr(c[i]->phone_num, p_num) != NULL){
+				printf("[%2d] %s : %s | %s | %s | %s\n", no + 1, c[i]->name, c[i]->phone_num, c[i]->email, c[i]->relationship, sign[c[i]->favorite]);
+				no++;
+			}
+		}
+	}
+	if(no > 1){
+		printf("> %d Contacts are founded.\n", no);
+	}else if(no == 1){
+		printf("> %d Contact is founded.\n", no);
+	}else if(no == 1){
+		printf("> Contact does not exist.\n", );
+	}
 }
 
 void saveContact(Contact* c[], int size){
