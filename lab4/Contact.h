@@ -17,3 +17,11 @@ typedef struct{
 } Contact;
 
 #endif
+
+/*
+#ifndef PREVENT
+#define PREVENT
+#endif
+
+for preventing typedef redefinition
+*/
