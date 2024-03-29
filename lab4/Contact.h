@@ -1,5 +1,5 @@
-#ifndef PREVENT
-#define PREVENT
+#ifndef __PREVENT__
+#define __PREVENT__
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -19,8 +19,11 @@ typedef struct{
 #endif
 
 /*
-#ifndef PREVENT
-#define PREVENT
+#ifndef __PREVENT__
+#define __PREVENT__
+
+...
+
 #endif
 
 for preventing typedef redefinition
