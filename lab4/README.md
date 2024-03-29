@@ -44,6 +44,7 @@ subscribeFavorite : 선택 기능으로, 연락처 즐겨찾기 설정 및 해�
 
 7-2번 스크린샷은 기록된 report.txt file의 내용이다.
 
+마지막 merge screenshot은 필자가 fastforward 방식으로 merge해서 기록을 제대로 남기지 못했기에, reflog를 사용하여 merge된 기록을 대신 보여주는 장면이다.
 
 소감문: 
 
