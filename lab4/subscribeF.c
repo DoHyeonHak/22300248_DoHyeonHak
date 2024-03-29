@@ -49,3 +49,5 @@ void subscribeFavorite(Contact* c[], int size){
 		}
 	}
 }
+
+
