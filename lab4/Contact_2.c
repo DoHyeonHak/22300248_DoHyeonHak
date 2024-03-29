@@ -1,6 +1,9 @@
 #include "Contact.h"
 #include "Contact_2.h"
 
+
+
+
 // another functions
 int loadData(Contact *c[]){
 	// load Data
