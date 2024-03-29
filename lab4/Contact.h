@@ -16,6 +16,12 @@ typedef struct{
     int favorite;
 } Contact;
 
+// CRUD
+int addContact(Contact* c[], int size);
+void printContact(Contact* c[], int size);
+void editContact(Contact* c[], int size);
+int deleteContact(Contact* c[], int size);
+
 #endif
 
 /*

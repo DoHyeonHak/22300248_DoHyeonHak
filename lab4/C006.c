@@ -3,10 +3,8 @@
 #include <string.h>
 #include <time.h>
 
-#include "Contact.h"								// include structure
-#include "CRUD.h"									// include CRUD functions
-#include "Function.h"								// include another functions[load, search, save, extra(subscribe favorite) func]
-
+#include "Contact.h"								// include structure and Contact CRUD
+#include "Contact_2.h"								// include Contact functions
 
 int main(void) {
 	int amount;	                            // amount of Contact
