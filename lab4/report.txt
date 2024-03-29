@@ -1,0 +1,48 @@
+1. Contact List
+[ 1] James    : 010-1234-5678 | james@naver.com         | family    
+[ 2] Michael  : 010-3456-7890 | michael@gmail.com       | business  
+[ 3] Edit     : 010-2222-2222 | edit@handong.ac.kr      | friend    
+[ 4] David    : 010-5678-9012 | david@naver.com         | friend    
+[ 5] Richard  : 010-6789-0123 | richard@handong.ac.kr   | business  
+[ 6] Joseph   : 010-7890-1234 | joseph@gmail.com        | family    
+[ 7] Charles  : 010-8901-2345 | charles@daum.net        | friend    
+[ 8] Thomas   : 010-9012-3456 | thomas@naver.com        | business  
+[ 9] Daniel   : 010-0123-4567 | daniel@handong.ac.kr    | family    
+[10] Matthew  : 010-3456-5678 | matthew@gmail.com       | friend    
+[11] Anthony  : 010-2345-6780 | anthony@daum.net        | business  
+[12] Donald   : 010-3456-7891 | donald@naver.com        | family    
+[13] Mark     : 010-4567-8902 | mark@handong.ac.kr      | friend    
+[14] Paul     : 010-5678-9013 | paul@gmail.com          | business  
+[15] Steven   : 010-6789-0124 | steven@daum.net         | family    
+[16] Andrew   : 010-7890-1235 | andrew@naver.com        | friend    
+[17] Kenneth  : 010-8901-2346 | kenneth@handong.ac.kr   | business  
+[18] Joshua   : 010-9012-3457 | joshua@gmail.com        | family    
+[19] Kevin    : 010-0123-4568 | kevin@daum.net          | friend    
+[20] Brian    : 010-1234-5679 | brian@naver.com         | business  
+[21] George   : 010-2345-6790 | george@handong.ac.kr    | family    
+[22] Edward   : 010-3456-7892 | edward@gmail.com        | friend    
+[23] Ronald   : 010-4567-8903 | ronald@daum.net         | business  
+[24] Timothy  : 010-5678-9014 | timothy@naver.com       | family    
+[25] Jason    : 010-6789-0125 | jason@handong.ac.kr     | friend    
+[26] Jeffrey  : 010-7890-1236 | jeffrey@gmail.com       | business  
+[27] Ryan     : 010-8901-2347 | ryan@daum.net           | family    
+[28] Gary     : 010-9012-3458 | gary@naver.com          | friend    
+[29] Nicholas : 010-0123-4569 | nicholas@handong.ac.kr  | business  
+[30] Kim      : 010-1111-1111 | Kim@naver.com           | parent    
+Total : 30
+
+2. Favorite Contact List
+[ 1] James    : 010-1234-5678 | james@naver.com         | family    
+[ 2] Michael  : 010-3456-7890 | michael@gmail.com       | business  
+[ 3] Daniel   : 010-0123-4567 | daniel@handong.ac.kr    | family    
+[ 4] Anthony  : 010-2345-6780 | anthony@daum.net        | business  
+[ 5] Mark     : 010-4567-8902 | mark@handong.ac.kr      | friend    
+[ 6] Steven   : 010-6789-0124 | steven@daum.net         | family    
+[ 7] Joshua   : 010-9012-3457 | joshua@gmail.com        | family    
+[ 8] Brian    : 010-1234-5679 | brian@naver.com         | business  
+[ 9] Edward   : 010-3456-7892 | edward@gmail.com        | friend    
+[10] Timothy  : 010-5678-9014 | timothy@naver.com       | family    
+[11] Ryan     : 010-8901-2347 | ryan@daum.net           | family    
+[12] Nicholas : 010-0123-4569 | nicholas@handong.ac.kr  | business  
+Total : 12
+
